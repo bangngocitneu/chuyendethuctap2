@@ -1,0 +1,24 @@
+<a href="/admin/order" type="button" class="btn btn-warning">Back</a>
+
+<div class="container">
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Mã hóa đơn</th>
+                <th>Mã sản phẩm</th>
+                <th>Số lượng</th>
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let list of listOrderDetail; let i = index">
+            <tr>
+                <td>{{i+1}}</td>
+                <td>{{list.order_id}}</td>
+                <td>{{list.product_id}}</td>
+                <td>{{list.quantity}}</td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>

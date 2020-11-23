@@ -1,0 +1,69 @@
+<!-- slide -->
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+        <li data-target="#demo" data-slide-to="3"></li>
+    </ul>
+
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="assets/image/slide1.jpg" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="assets/image/slide2.jpg" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="assets/image/slide3.jpg" alt="">
+        </div>
+        <div class="carousel-item">
+            <img src="assets/image/slide4.jpg" alt="">
+        </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </a>
+
+</div>
+
+<app-search *ngIf="listProductCurrent.length!=0" [listProduct]="this.listProductCurrent" (listSearched)="search($event)"></app-search>
+
+<!-- danh muc -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 content-left">
+            <h4>
+                Danh Mục Sản Phẩm
+            </h4>
+            <p class="category-item" (click)="selectCategory(0)">Tất Cả</p>
+            <ul *ngFor="let listCate of listCategory">
+                <li class="category-item" (click)="selectCategory(listCate.id)" [ngClass]="{'active':listCate.id == currentcategory}">{{listCate.name}}</li>
+            </ul>
+        </div>
+        <div class="col-md-9 content-right">
+            <div style="display: flex; flex-wrap: wrap;">
+                <ul *ngFor="let list of listProductCurrent; let i = index" style="display: inline-block; width: 250px;">
+                    <li class="image" (click)="detail(list.id)">
+                        <img src="assets/image/{{list.image}}" alt="Error" />
+                    </li>
+                    <li class="name">{{list.name}}</li>
+                    <li class="price">{{list.price}}đ</li>
+                    <button class="btn btn-success" (click)="addProductToCart(list)">Thêm vào giỏ</button>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<app-pagination *ngIf="listProduct.length != 0" [numberProduct]="listProduct.length" (OutCurrentPage)="paging($event)"></app-pagination>

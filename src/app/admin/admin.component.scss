@@ -1,0 +1,25 @@
+.main {
+    background-color: rgba(245, 245, 245, 0.514);
+    height: 100vh;
+    & .left {
+        height: 100%;
+        background-color: grey;
+        & p {
+            font-size: 2vw;
+            color: white;
+            border-bottom: white 1px solid;
+            padding: 1vw;
+            & a {
+                color: white;
+                text-decoration: none;
+            }
+            & a:hover {
+                cursor: pointer;
+                color: yellow;
+            }
+            .active {
+                color: yellow;
+            }
+        }
+    }
+}

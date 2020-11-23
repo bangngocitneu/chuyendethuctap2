@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "NT-Home-shop"
+    }
+  },
+  "defaultProject": "NT-Home-shop",
+  "cli": {
+    "analytics": "d4c1939c-6621-44e0-b405-496fbe6fa035"
+  }
 }

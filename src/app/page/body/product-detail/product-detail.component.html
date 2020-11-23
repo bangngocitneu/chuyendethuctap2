@@ -1,0 +1,35 @@
+<div>
+    <h1 style="text-align: center; margin-bottom: 50px;">Thông tin chi tiết sản phẩm</h1>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col productDetail">
+                <img src="assets/image/{{product?.image}}" alt="Error" style="width: 400px; height: 400px;" />
+            </div>
+            <div class="col" id="infor">
+                <h3 class="name">Tên sản phẩm: {{product?.name}}</h3>
+                <div class="rate">
+                    <span>Đánh giá: </span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+                <h3 class="price">Giá: {{product?.price}}đ</h3>
+                <h3 class="discount_price">Giá khuyến mại: {{product?.discount_price}}%</h3>
+                <h3>Số lượng: {{product?.quantity}} sản phẩm</h3>
+                <div class="d-flex btn-btns">
+                    <div class="ml-auto p-2">
+                        <button class="btn btn-product-page btn-add-cart" (click)="addProductToCart()"><span>Thêm vào giỏ</span></button>
+                    </div>
+                </div>
+                <!-- <button class="btn btn-success" (click)="addProductToCart()">Thêm vào giỏ hàng</button> -->
+            </div>
+        </div>
+    </div>
+    <div class="col description" id="infor">
+        <div><strong>Mô tả sản phẩm</strong> </div>
+        <p>{{product?.description}}</p>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+<h3 style="text-align: center;">Quản lý danh mục sản phẩm</h3>
+<button type="button" class="btn btn-success addbutton" data-toggle="modal" data-target="#addProduct">Thêm danh mục</button>
+<div id="addProduct" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <h4 class="modal-title">Thêm mới danh mục</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addForm" (ngSubmit)="addCategory()">
+                    <div class="form-group">
+                        <label for="name">Tên danh mục</label>
+                        <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter name category">
+                        <div *ngIf="!this.addForm.controls.name.valid &&  this.addForm.controls.name.touched" class="alert alert-danger">Nhập vào tên danh mục</div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Thêm</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" #closeButtonAdd class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- List category -->
+<div class="container">
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên danh mục</th>
+                <th>Enable</th>
+                <th>Quản lí</th>
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let list of listCategoryCurrent; let i = index">
+            <tr>
+                <td>{{list.id}}</td>
+                <td>{{list.name}}</td>
+                <td>{{list.enable}}</td>
+                <td>
+                    <button class="btn btn-danger" (click)="delete(list.id)" style="margin-right: 100px;">Delete</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#editProduct" (click)="openForm(list)">Edit</button>
+                    <button (click)="detail(list.id)" class="btn btn-primary" style="margin-top: 10px; margin-left: 40px ;margin-bottom: 10px;">Xem chi tiết</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<!-- Edit category -->
+
+<div id="editProduct" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <h4 class="modal-title">Sửa danh mục sản phẩm</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editForm" (ngSubmit)="editCategory()">
+                    <div class="form-group">
+                        <label for="name">Tên danh mục</label>
+                        <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter name category">
+                    </div>
+                    <div class="form-group">
+                        <label for="enable">Enable</label>
+                        <input formControlName="enable" type="text" class="form-control" id="enable" placeholder="Enter enable category">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" #closeButtonEdit class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<app-pagination *ngIf="listCategory.length != 0" [numberProduct]="listCategory.length" (OutCurrentPage)="paging($event)"></app-pagination>

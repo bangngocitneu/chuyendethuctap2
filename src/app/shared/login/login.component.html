@@ -1,0 +1,28 @@
+<div class="sidenav">
+    <div class="login-main-text">
+        <h2>Application<br> Admin</h2>
+        <p>Login from here to access.</p>
+    </div>
+</div>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form [formGroup]="LoginForm" (ngSubmit)="submitLogin()">
+                <div *ngIf=alertLogin class=" col-md-9 check alert alert-warning" role="alert">
+                    <strong>Tài khoản hoặc mật khẩu không đúng!</strong> Please try again!
+                </div>
+                <div class="form-group">
+                    <label for="username">UserName Admin:</label>
+                    <input type="text" formControlName="username" class="form-control" placeholder="Enter username" id="username">
+                    <div *ngIf="!this.LoginForm.controls.username.valid &&  this.LoginForm.controls.username.touched" class="alert alert-danger">Nhập User Name</div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" formControlName="password" class="form-control" placeholder="Enter password" id="password">
+                    <div *ngIf="!this.LoginForm.controls.password.valid &&  this.LoginForm.controls.password.touched" class="alert alert-danger">Nhập PassWord</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

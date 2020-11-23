@@ -1,0 +1,21 @@
+<div class="paging">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous" (click)="downPage()">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li *ngFor="let page of numberPage" class="page-item" (click)="toPage(page)" [ngClass]="{'active': currentPage == page}">
+                <p class="page-link">{{ page }}</p>
+            </li>
+            <li class="page-item">
+                <a class="page-link" aria-label="Next" (click)="upPage()">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

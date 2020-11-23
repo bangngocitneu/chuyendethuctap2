@@ -1,0 +1,6 @@
+<form [formGroup]="searchForm" class="input-group mb-3" (ngSubmit)="searchSubmit($event)">
+    <input type="text" formControlName="search" class="form-control" placeholder="Tìm kiếm sản phẩm ..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+        <button class="input-group-text" id="basic-addon2" type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</form>

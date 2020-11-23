@@ -1,0 +1,151 @@
+<h3 style="text-align: center;">Quản lý khách hàng</h3>
+<button type="button" class="btn btn-success addbutton" data-toggle="modal" data-target="#addCustomer">Thêm mới khách hàng</button>
+<div id="addCustomer" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <h4 class="modal-title">Thêm mới khách hàng</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addForm" (ngSubmit)="addCustomer()">
+                    <div class="form-group">
+                        <label for="fullname">Họ và tên</label>
+                        <input formControlName="fullname" type="text" class="form-control" id="fullname" placeholder="Enter fullname product">
+                        <div *ngIf="!this.addForm.controls.fullname.valid &&  this.addForm.controls.fullname.touched" class="alert alert-danger">Nhập họ tên khách hàng</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input formControlName="username" type="text" class="form-control" id="username" placeholder="Enter username product">
+                        <div *ngIf="!this.addForm.controls.username.valid &&  this.addForm.controls.username.touched" class="alert alert-danger">Nhập vào username</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="passWord">Pass Word</label>
+                        <input formControlName="passWord" type="text" class="form-control" id="passWord" placeholder="Enter passWord product">
+                        <div *ngIf="!this.addForm.controls.passWord.valid &&  this.addForm.controls.passWord.touched" class="alert alert-danger">Nhập vào password</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input formControlName="email" type="text" class="form-control" id="email" placeholder="Enter email product">
+                        <div *ngIf="!this.addForm.controls.email.valid &&  this.addForm.controls.email.touched" class="alert alert-danger">Nhập vào email</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Số điện thoại</label>
+                        <input formControlName="phone" type="text" class="form-control" id="phone" placeholder="Enter phone product">
+                        <div *ngIf="!this.addForm.controls.phone.valid &&  this.addForm.controls.phone.touched" class="alert alert-danger">Nhập vào số điện thoại</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Địa chỉ</label>
+                        <input formControlName="address" type="text" class="form-control" id="address" placeholder="Enter address product">
+                        <div *ngIf="!this.addForm.controls.address.valid &&  this.addForm.controls.address.touched" class="alert alert-danger">Nhập vào địa chỉ</div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Thêm</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" #closeButtonAdd class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- List customer -->
+<div class="container">
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Họ và tên</th>
+                <th>Username</th>
+                <th>PassWord</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Role</th>
+                <th>Quản lí</th>
+
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let list of listCustomerCurrent; let i = index">
+            <tr>
+                <td>{{list.id}}</td>
+                <td>{{list.fullname}}</td>
+                <td>{{list.username}}</td>
+                <td>{{list.passWord}}</td>
+                <td>{{list.email}}</td>
+                <td>{{list.phone}}</td>
+                <td>{{list.address}}</td>
+                <td>{{list.role}}</td>
+                <td>
+                    <button (click)="delete(list.id)"><i class="far fa-trash-alt"></i></button>
+                    <button data-toggle="modal" data-target="#editCustomer" (click)="openForm(list)"><i class="far fa-edit"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<!-- Edit product -->
+
+<div id="editCustomer" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <h4 class="modal-title">Sửa thông tin khách hàng</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editForm" (ngSubmit)="editCustomer()">
+                    <div class="form-group">
+                        <label for="fullname">Họ và tên</label>
+                        <input formControlName="fullname" type="text" class="form-control" id="fullname" placeholder="Enter fullname customer">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input formControlName="username" type="text" class="form-control" id="username" placeholder="Enter username customer">
+                    </div>
+                    <div class="form-group">
+                        <label for="passWord">Pass Word</label>
+                        <input formControlName="passWord" type="text" class="form-control" id="passWord" placeholder="Enter passWord customer">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input formControlName="email" type="text" class="form-control" id="email" placeholder="Enter email customer">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input formControlName="phone" type="text" class="form-control" id="phone" placeholder="Enter phone customer">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input formControlName="address" type="text" class="form-control" id="address" placeholder="Enter address customer">
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <input formControlName="role" type="text" class="form-control" id="role" placeholder="Enter role customer">
+                    </div>
+                    <button type="submit" class="btn btn-success">Sửa</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" #closeButtonEdit class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- <app-pagination *ngIf="listCustomer.length != 0" [numberProduct]="listCustomer.length" (OutCurrentPage)="paging($event)"></app-pagination> -->

@@ -1,0 +1,37 @@
+<div class="container" style="height: 70vh;">
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ngày tạo hóa đơn</th>
+                <th>Tên khách hàng</th>
+                <th>Địa chỉ</th>
+                <th>Số điện thoại</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái vận đơn</th>
+                <th>Trạng thái thanh toán</th>
+                <th>Quản lí</th>
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let list of listOrderCurrent; let i = index">
+            <tr>
+                <td>{{i+1}}</td>
+                <td>{{list.create_date}}</td>
+                <td>{{list.customer.fullname}}</td>
+                <td>{{list.customer.address}}</td>
+                <td>{{list.customer.phone}}</td>
+                <td>{{list.total_money}}đ</td>
+                <td>{{list.status}}</td>
+                <td>{{list.payment}}</td>
+                <td>
+                    <button (click)="delete(list.id)"><i class="far fa-trash-alt"></i></button>
+                    <button data-toggle="modal" data-target="#editOrder" (click)="openForm(list)"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-primary btn-sm" (click)="detail(list.id)">Chi tiết hóa đơn</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-pagination *ngIf="listOrders.length != 0" [numberProduct]="listOrders.length" (OutCurrentPage)="paging($event)"></app-pagination>

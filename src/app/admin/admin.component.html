@@ -1,0 +1,21 @@
+<div class="row main">
+    <div class="col-sm-3 left">
+        <p><a [ngClass]="{'active': active == 'overView'}" (click)="changeSelected('overView')" routerLink="/admin/tongquan">TỔNG QUAN</a></p>
+        <p><a [ngClass]="{'active': active == 'categoryManagement'}" (click)="changeSelected('categoryManagement')" routerLink="/admin/typebook">Quản lý danh mục sản phẩm</a>
+        </p>
+        <p><a [ngClass]="{'active': active == 'productManagement'}" (click)="changeSelected('productManagement')" routerLink="/admin/book">Quản lý sản phẩm</a></p>
+        <p><a [ngClass]="{'active': active == 'customerManagement'}" (click)="changeSelected('customerManagement')" routerLink="/admin/customer">Quản lý khách hàng</a></p>
+        <p><a [ngClass]="{'active': active == 'orderManagement'}" (click)="changeSelected('orderManagement')" routerLink="/admin/order">Quản lý đơn hàng</a></p>
+        <p><a (click)="logout()">Đăng xuất</a></p>
+    </div>
+    <div class="col-sm-9 right">
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+
+
+
+
+<br><br>

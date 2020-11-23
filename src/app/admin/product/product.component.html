@@ -1,0 +1,166 @@
+<h3 style="text-align: center;">Quản lý sản phẩm</h3>
+
+<button type="button" class="btn btn-success addbutton" data-toggle="modal" data-target="#addProduct">Thêm sản phẩm mới</button>
+<div id="addProduct" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <h4 class="modal-title">Thêm sản phẩm mới</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="addForm" (ngSubmit)="addProduct()">
+                    <div class="form-group">
+                        <label for="name">Tên sản phẩm</label>
+                        <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter name product">
+                        <div *ngIf="!this.addForm.controls.name.valid &&  this.addForm.controls.name.touched" class="alert alert-danger">Nhập vào têm sảm phẩm</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category_id">category_id</label>
+                        <input formControlName="category_id" type="text" class="form-control" id="category_id" placeholder="Enter category_id product">
+                        <div *ngIf="!this.addForm.controls.category_id.valid &&  this.addForm.controls.category_id.touched" class="alert alert-danger">Nhập vào mã danh mục</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Giá</label>
+                        <input formControlName="price" type="text" class="form-control" id="price" placeholder="Enter price product">
+                        <div *ngIf="!this.addForm.controls.price.valid &&  this.addForm.controls.price.touched" class="alert alert-danger">Nhập vào giá</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="discount_price">Giá khuyến mại</label>
+                        <input formControlName="discount_price" type="text" class="form-control" id="discount_price" placeholder="Enter discount_price product">
+                        <div *ngIf="!this.addForm.controls.discount_price.valid &&  this.addForm.controls.discount_price.touched" class="alert alert-danger">Nhập vào giá khuyến mại</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Hình ảnh</label>
+                        <input formControlName="image" type="text" class="form-control" id="image" placeholder="Enter image product">
+                        <div *ngIf="!this.addForm.controls.image.valid &&  this.addForm.controls.image.touched" class="alert alert-danger">Nhập vào ảnh</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">quantity</label>
+                        <input formControlName="quantity" type="text" class="form-control" id="quantity" placeholder="Enter quantity product">
+                        <div *ngIf="!this.addForm.controls.quantity.valid &&  this.addForm.controls.quantity.touched" class="alert alert-danger">Nhập vào số lượng</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả</label>
+                        <input formControlName="description" type="text" class="form-control" id="description" placeholder="Enter description product">
+                        <div *ngIf="!this.addForm.controls.description.valid &&  this.addForm.controls.description.touched" class="alert alert-danger">Nhập vào mô tả</div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Thêm</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" #closeButtonAdd class="btn btn-default" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- List product -->
+<!-- <a style="cursor: pointer" (click)="exportexcel()"> 
+  cloud_download 
+</a> -->
+<div class="container">
+    <table class="table table-hover table-striped table-bordered" id="excel-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Giá</th>
+                <th>Giá Khuyến mại</th>
+                <th>Số lượng</th>
+                <th>Mô tả</th>
+                <th>Enable</th>
+                <th>Quản lí</th>
+
+            </tr>
+        </thead>
+
+        <tbody *ngFor="let list of listProductCurrent; let i = index">
+            <tr *ngFor="let item of products">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td><img src="assets/image/{{item.image}}" alt="Không thể hiển thị ảnh"></td>
+                <td>{{item.price}}</td>
+                <td>{{item.discount_price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.enable}}</td>
+                <td>
+                    <button (click)="delete(list.id)"><i class="far fa-trash-alt"></i></button>
+                    <button data-toggle="modal" data-target="#editProduct" (click)="openForm(list)"><i class="far fa-edit"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Edit product -->
+
+<div id="editProduct" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <h4 class="modal-title">Sửa sản phẩm</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editForm" (ngSubmit)="editProduct()">
+                    <div class="form-group">
+                        <label for="name">Tên sản phẩm</label>
+                        <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter name product">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category_id">category_id</label>
+                        <input formControlName="category_id" type="text" class="form-control" id="category_id" placeholder="Enter category_id product">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Giá</label>
+                        <input formControlName="price" type="text" class="form-control" id="price" placeholder="Enter price product">
+                    </div>
+                    <div class="form-group">
+                        <label for="discount_price">Giá khuyến mại</label>
+                        <input formControlName="discount_price" type="text" class="form-control" id="discount_price" placeholder="Enter discount_price product">
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Hình ảnh</label>
+                        <input formControlName="image" type="text" class="form-control" id="image" placeholder="Enter image product">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">Số lượng</label>
+                        <input formControlName="quantity" type="text" class="form-control" id="quantity" placeholder="Enter quantity product">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Mô tả</label>
+                        <input formControlName="description" type="text" class="form-control" id="description" placeholder="Enter description product">
+                    </div>
+                    <div class="form-group">
+                        <label for="enable">Enable</label>
+                        <input formControlName="enable" type="text" class="form-control" id="enable" placeholder="Enter enable product">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" #closeButtonEdit class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- <app-pagination *ngIf="listProduct.length != 0" [numberProduct]="listProduct.length" (OutCurrentPage)="paging($event)"></app-pagination> -->
